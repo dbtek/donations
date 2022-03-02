@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Collect donations easily. This is a static website built with Gatsby. Takes advantage of a few [Gatsby Cloud Functions](https://www.gatsbyjs.com/products/cloud/functions/) to provision payments.
+  Collect donations easily. This is a static website built with Gatsby. Takes advantage of a few <a href="Gatsby Cloud Functions">https://www.gatsbyjs.com/products/cloud/functions</a> to provision payments.
 </p>
 
 ---
@@ -35,6 +35,7 @@ One can add new providers by copying existing one.
 
 Currently supported providers:
 - TF (Turkiye Finans), placed at `/src/payment-providers/tf.ts`.
+- SIPAY ([Sipay](https://sipay.com.tr))
 
 Note: Use only TypeScript files. JS files are temporary and built from TypeScript sources. Any change here should be built with `npm run build-pp`.
 
@@ -42,4 +43,4 @@ Note: Use only TypeScript files. JS files are temporary and built from TypeScrip
 
 Deploy this project on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://gitlab.aurorabilisim.com/ismail.demirbilek/donations)
+[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/dbtek/donations)
