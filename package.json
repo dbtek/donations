@@ -10,7 +10,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build-pp": "tsc src/payment-providers/*.ts",
+    "build-pp": "tsc src/payment-providers/{*.ts,**/*.ts}",
     "build": "npm run build-pp && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
@@ -31,10 +31,12 @@
     "gatsby-source-filesystem": "^3.5.0",
     "gatsby-transformer-remark": "^4.2.0",
     "gatsby-transformer-sharp": "^3.5.0",
-    "nanoid": "^3.1.23",
+    "nanoid": "^3.3.1",
+    "node-fetch": "^2.6.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-input-mask": "^2.0.4",
     "sass": "^1.34.0",
     "typescript": "^4.2.4"
   },
