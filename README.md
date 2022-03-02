@@ -44,3 +44,8 @@ Note: Use only TypeScript files. JS files are temporary and built from TypeScrip
 Deploy this project on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
 
 [<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/dbtek/donations)
+
+**Environment Variables**
+
+When deploying to Gatsby Cloud, you need to add appropriate environment variables. Please see `.env.sample` file for examples.
+
