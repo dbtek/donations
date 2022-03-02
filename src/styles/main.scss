@@ -1,0 +1,167 @@
+@import "reboot";
+
+$primary: #663399;
+$primary-invert: #fff;
+$accent: #663399;
+$text: #232129;
+$border-radius: 19px;
+$border-color: #999;
+$btn-default: #aaa;
+$breakpoint-desktop: 960px;
+
+body {
+  color: $text;
+  @media (min-width: $breakpoint-desktop) {
+    padding: 2rem;
+  }
+  font-family: -apple-system, Roboto, sans-serif, serif;
+}
+
+h1, h2, h3, h4, h5 {
+  margin-top: 0;
+  margin-bottom: 4rem;
+  max-width: 320px;
+
+  &.accent {
+    color: $accent,
+  }
+}
+
+p {
+  margin-bottom: 3rem;
+}
+
+ul, ol {
+  margin-bottom: 96px;
+  padding-left: 0;
+}
+
+li {
+  font-weight: 300;
+  font-size: 1.5rem;
+  max-width: 560px;
+  margin-bottom: 30px;
+}
+
+a {
+  color: lighten($accent, 10);
+  font-weight: bold;
+  vertical-align: 5%;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  &.sm input,
+  &.sm select,
+  &.sm textarea {
+    max-width: 240px;
+  }
+
+  &.md input,
+  &.md select,
+  &.md textarea {
+    max-width: 320px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: $border-radius;
+  }
+
+  input[type="checkbox"] {
+    width: unset;
+    border-radius: 0;
+  }
+}
+
+input, select, button, textarea {
+  border: 1px solid $border-color;
+}
+
+.btn {
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: $btn-default;
+  display: inline-block;
+
+  &:hover {
+    background-color: darken($btn-default, 10);
+    text-decoration: none;
+  }
+
+  &.btn-primary {
+    background-color: $primary;
+    color: $primary-invert;
+
+    &:hover {
+      background-color: darken($primary, 10);
+    }
+  }
+}
+
+.has-shadow {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+.has-shadow--3 {
+  box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);
+}
+
+.Layout {
+  margin: 0 auto;
+  max-width: 960px;
+
+  .Layout-logo {
+    max-width: 220px;
+    @media (min-width: $breakpoint-desktop) {
+      max-width: 300px;
+    }
+  }
+
+  .Layout-content {
+    margin-top: 1rem;
+    padding: 1rem;
+    @media (min-width: $breakpoint-desktop) {
+      margin-top: 3rem;
+      padding: 2rem 4rem;
+      min-height: calc(100vh - 250px);
+    }
+  }
+  footer {
+    padding: 2rem 0;
+    text-align: center;
+  }
+}
+
+.Donate {
+  position: relative;
+ 
+  .Donate-hero {
+
+    @media (min-width: $breakpoint-desktop) {
+      position: absolute;
+      top: calc(50% - 200px);
+      left: calc(100% - 400px);
+      width: 500px;
+      height: 300px; 
+    }
+    
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
