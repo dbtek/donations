@@ -7,7 +7,6 @@ var TFProvider = {
     getPaymentFormItems: function (input) {
         var TEST = process.env['TF_TEST_MODE'] === '1';
         var TF = TEST ? TF_TEST : TF_PROD;
-        console.log(process.env);
         var clientId = TF.clientId;
         var successUrl = constants_1.PAYMENT_SUCCESS_URL;
         var failUrl = constants_1.PAYMENT_FAIL_URL;
