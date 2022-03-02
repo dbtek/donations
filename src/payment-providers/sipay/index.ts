@@ -53,10 +53,6 @@ const SipayProvider: TPaymentProvider = {
 
     const amount = input.amount.toFixed(2);
     const orderId = nanoid(8).toLowerCase();
-
-    /** */
-    const token = await getToken();
-
     const [firstname, ...nameRest] = input.name.split(' ');
 
     const invoiceItems = [{
@@ -65,6 +61,8 @@ const SipayProvider: TPaymentProvider = {
       'qnantity': 1,
       'description': ''
     }];
+
+    const token = await getToken();
 
     const posList = await getPosList({
       amount,
