@@ -18,6 +18,11 @@ export default async function paymentGW(req: Request, res: Response) {
     recurringTimes: body['recurringTimes'],
     phone: body['phone'],
     notes: body['notes'],
+    ccHolder: body['ccHolder'],
+    ccNumber: body['ccNumber'],
+    ccExpireMonth: body['ccExpireMonth'],
+    ccExpireYear: body['ccExpireYear'],
+    ccCVV: body['ccCVV'],
   });
 
   // support async getPaymentFormItems methods

@@ -5,6 +5,11 @@ export type TPaymentInput = {
   recurring: boolean;
   recurringTimes?: number;
   notes?: string;
+  ccHolder?: string;
+  ccNumber?: string;
+  ccExpireMonth?: string;
+  ccExpireYear?: string;
+  ccCVV?: string;
 }
 
 export type TPaymentProvider = {
