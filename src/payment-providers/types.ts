@@ -11,6 +11,9 @@ export type TPaymentProvider = {
   getPaymentFormItems: (input: TPaymentInput) => {
     endpoint: string,
     [key: string]: any
-  },
+  } | Promise<{
+    endpoint: string,
+    [key: string]: any
+  }>,
   validatePayment: () => boolean
 }
