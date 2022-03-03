@@ -1,7 +1,7 @@
 export const PAYMENT_SUCCESS_URL = process.env['BASE_URL'] + '/api/payment-cb-success';
 export const PAYMENT_FAIL_URL = process.env['BASE_URL'] + '/api/payment-cb-error';
 
-export const RECURRING_PAYMENT_ENABLED = process.env['GATSBY_RECURRING_PAYMENT_ENABLED'];
+export const RECURRING_PAYMENT_ENABLED = ['1', 'true'].includes(process.env['GATSBY_RECURRING_PAYMENT_ENABLED']);
 export const DEFAULT_PAYMENT_PROVIDER = process.env['GATSBY_DEFAULT_PAYMENT_PROVIDER'];
 export const CC_FORM_ENABLED = ['1', 'true'].includes(process.env['GATSBY_CC_FORM_ENABLED']);
 export const LOGO_URL = process.env['GATSBY_LOGO_URL'];
