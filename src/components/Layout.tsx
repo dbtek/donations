@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { LOGO_URL, COPYRIGHT } from '../constants';
 
-export default function Layout({ children, className }) {
+type LayoutProps = {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Layout({ children, className }: LayoutProps) {
   return (
     <div className="Layout">
       <header>
