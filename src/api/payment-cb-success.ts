@@ -1,7 +1,7 @@
 
 export default function paymentCbSuccess(req, res) {
-  const amount = req.body['amount'];
-  const name = req.body['tismi'];
+  const amount = req.body['amount'] || '';
+  const name = req.body['tismi'] || '';
   const recurringTimes = req.body['RecurringPaymentNumber'];
   const redirectTo = `/thanks?name=${name}&amount=${amount}${recurringTimes ? `&recurringTimes=${recurringTimes}` : ''}`;
 
