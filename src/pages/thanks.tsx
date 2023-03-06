@@ -13,11 +13,21 @@ const ThanksPage = ({ location }) => {
   return (
     <Layout>
       <title>Donate</title>
-      <h1>Sn {name} bağışınız için teşekkür ederiz.</h1>
-      <p style={{ fontSize: '1.25rem' }}>
-        Kartınızdan ₺{amount} tutarında ücret tahsil edildi.
-        {recurringTimes && ` Düzenli bağış talimatı verdiniz. Aynı meblağ sonraki ${parseInt(recurringTimes) - 1} aylık eksterinize de yansıyacaktır.`}
-      </p>
+      {name ? (
+        <h1>Sn {name} bağışınız için teşekkür ederiz.</h1>
+      ) : (
+        <h1>Bağışınız için teşekkür ederiz.</h1>
+      )}
+      {amount ? (
+        <p style={{ fontSize: '1.25rem' }}>
+          Kartınızdan ₺{amount} tutarında ücret tahsil edildi.
+          {recurringTimes && ` Düzenli bağış talimatı verdiniz. Aynı meblağ sonraki ${parseInt(recurringTimes) - 1} aylık eksterinize de yansıyacaktır.`}
+        </p>
+      ) : (
+        <p style={{ fontSize: '1.25rem' }}>
+          Bağışınız kartınızdan başarıyla tahsil edildi.
+        </p>
+      )}
 
       <Button primary onClick={() => navigate('/')}>
         Tekrar Bağış Yap

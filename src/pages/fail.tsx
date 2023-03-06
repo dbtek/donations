@@ -11,7 +11,11 @@ const ThanksPage = ({ location }) => {
   return (
     <Layout>
       <title>Üzgünüz bağış alınamadı</title>
-      <h1>Sn {name} üzgünüz, kartınızdan tahsilat yapılamadı :(</h1>
+      {name ? (
+        <h1>Sn {name} üzgünüz, kartınızdan tahsilat yapılamadı :(</h1>
+      ) : (
+        <h1>Üzgünüz, kartınızdan tahsilat yapılamadı :(</h1>
+      )}
       <p style={{ fontSize: '1.25rem' }}>
         Hata: {message}
       </p>
