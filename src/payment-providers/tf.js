@@ -1,9 +1,10 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var crypto = require("crypto");
 var nanoid_1 = require("nanoid");
 var constants_1 = require("../constants");
 var TFProvider = {
+    requireCC: false,
     getPaymentFormItems: function (input) {
         var TEST = process.env['TF_TEST_MODE'] === '1';
         var TF = TEST ? TF_TEST : TF_PROD;
@@ -16,7 +17,7 @@ var TFProvider = {
         var currencyCode = '949';
         var instalments = '';
         var amount = String(input.amount);
-        var orderId = nanoid_1.nanoid(8).toLowerCase();
+        var orderId = (0, nanoid_1.nanoid)(8).toLowerCase();
         var hashStr = clientId + orderId + amount + successUrl + failUrl + txnType + instalments + rnd + storeKey;
         var secData = crypto.createHash('sha1')
             .update(hashStr)
@@ -45,7 +46,7 @@ var TFProvider = {
             'tel': input.phone,
             'Fadres': input.notes || '',
             'tadres': input.notes || '',
-            'Fil': ''
+            'Fil': '',
         };
         if (isRecurring) {
             data['RecurringPaymentNumber'] = input.recurringTimes;
@@ -58,7 +59,7 @@ var TFProvider = {
         return true;
     }
 };
-exports["default"] = TFProvider;
+exports.default = TFProvider;
 /**
  * Prod config
  */
@@ -69,8 +70,8 @@ var TF_PROD = {
     api: {
         url: 'https://sanalpos.turkiyefinans.com.tr/fim/api',
         username: process.env['TF_API_USERNAME'],
-        password: process.env['TF_API_PASSWORD']
-    }
+        password: process.env['TF_API_PASSWORD'],
+    },
 };
 /**
  * Tets config
@@ -82,6 +83,6 @@ var TF_TEST = {
     api: {
         url: 'https://sanalpos.turkiyefinans.com.tr/fim/api',
         username: '',
-        password: ''
-    }
+        password: '',
+    },
 };
