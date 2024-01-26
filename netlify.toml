@@ -13,7 +13,7 @@
   TF_API_PASSWORD=
   TF_REFRESH_TIME=3
 
-  # SIPAY_HOST=https://app.sipay.com.tr
+  SIPAY_HOST=https://app.sipay.com.tr
   SIPAY_MERCHANT_KEY=
   SIPAY_APP_ID=
   SIPAY_APP_SECRET=
