@@ -1,0 +1,19 @@
+[template]
+
+[template.environment]
+  BASE_URL="Set base website url"
+  GATSBY_CC_FORM_ENABLED="Set 1 for in page credit card form 0 for hosted payment"
+  GATSBY_RECURRING_PAYMENT_ENABLED="Set 1 to enable 0 to disable"
+  GATSBY_DEFAULT_PAYMENT_PROVIDER="Either SIPAY or TF"
+
+  TF_TEST_MODE=0
+  TF_CLIENT_ID=
+  TF_STORE_KEY=
+  TF_API_USERNAME=
+  TF_API_PASSWORD=
+  TF_REFRESH_TIME=3
+
+  # SIPAY_HOST=https://app.sipay.com.tr
+  SIPAY_MERCHANT_KEY=
+  SIPAY_APP_ID=
+  SIPAY_APP_SECRET=
