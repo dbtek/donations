@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Collect donations easily. This is a static website built with Gatsby. Takes advantage of a few serverless Gatsby Functions to provision payments.
+  Collect donations easily. This is a static website built with Gatsby. Takes advantage of a few serverless functions to provision payments.
 </p>
 
 ---
