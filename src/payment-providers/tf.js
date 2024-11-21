@@ -1,7 +1,17 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var crypto = require("crypto");
-var nanoid_1 = require("nanoid");
 var constants_1 = require("../constants");
 var TFProvider = {
     requireCC: false,
@@ -12,53 +22,49 @@ var TFProvider = {
         var successUrl = constants_1.PAYMENT_SUCCESS_URL;
         var failUrl = constants_1.PAYMENT_FAIL_URL;
         var storeKey = TF.storeKey;
-        var txnType = 'Auth';
-        var rnd = new Date().getTime();
-        var currencyCode = '949';
-        var instalments = '';
-        var amount = String(input.amount);
-        var orderId = (0, nanoid_1.nanoid)(8).toLowerCase();
-        var hashStr = clientId + orderId + amount + successUrl + failUrl + txnType + instalments + rnd + storeKey;
-        var secData = crypto.createHash('sha1')
+        var refreshTime = process.env['TF_REFRESH_TIME'] || '5';
+        var parameters = {
+            amount: String(input.amount),
+            BillToCompany: '',
+            BillToName: input.name,
+            callbackUrl: successUrl,
+            clientId: clientId,
+            currency: '949',
+            failUrl: failUrl,
+            hashAlgorithm: 'ver3',
+            Instalment: '',
+            lang: 'tr',
+            okUrl: successUrl,
+            refreshTime: refreshTime,
+            rnd: new Date().getTime().toString(),
+            storetype: '3D_PAY_HOSTING',
+            TranType: 'Auth'
+        };
+        if (input.recurring) {
+            parameters['RecurringPaymentNumber'] = input.recurringTimes.toString();
+            parameters['RecurringFrequencyUnit'] = 'M';
+            parameters['RecurringFrequency'] = '1';
+        }
+        var sortedKeys = Object.keys(parameters).sort(function (a, b) { return a.localeCompare(b, undefined, { sensitivity: 'base' }); });
+        var sortedValues = sortedKeys.map(function (key) { return parameters[key] || ''; }).map(escapeSpecialChars); // Include empty values
+        var hashStr = "".concat(sortedValues.join('|'), "|").concat(storeKey);
+        console.log('hashStr', parameters, hashStr);
+        var secData = crypto.createHash('sha512')
             .update(hashStr)
             .digest('hex');
         var hashData = Buffer.from(secData, 'hex').toString('base64');
-        var isRecurring = input.recurring;
-        var data = {
-            'hashStr': hashStr,
-            'hashData': hashData,
-            'endpoint': TF.endpoint,
-            'clientid': clientId,
-            'amount': amount,
-            'oid': orderId,
-            'okUrl': successUrl,
-            'failUrl': failUrl,
-            'islemtipi': txnType,
-            'taksit': instalments,
-            'rnd': rnd,
-            'hash': hashData,
-            'storetype': '3d_pay_hosting',
-            'refreshtime': process.env['TF_REFRESH_TIME'],
-            'lang': 'tr',
-            'currency': currencyCode,
-            'Fismi': input.name,
-            'tismi': input.name,
-            'tel': input.phone,
-            'Fadres': input.notes || '',
-            'tadres': input.notes || '',
-            'Fil': '',
-        };
-        if (isRecurring) {
-            data['RecurringPaymentNumber'] = input.recurringTimes;
-            data['RecurringFrequencyUnit'] = 'M';
-            data['RecurringFrequency'] = 1;
-        }
+        var data = __assign({ 
+            //'hashStr': hashStr,
+            'hash': hashData, 'endpoint': TF.endpoint }, parameters);
         return data;
     },
     validatePayment: function () {
         return true;
     }
 };
+function escapeSpecialChars(value) {
+    return value.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
+}
 exports.default = TFProvider;
 /**
  * Prod config
