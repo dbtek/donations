@@ -92,10 +92,9 @@ function getPosList(_a) {
     });
 }
 var SipayProvider = {
-    requireCC: true,
     getPaymentFormItems: function getPaymentFormItems(input) {
         return __awaiter(this, void 0, void 0, function () {
-            var successUrl, failUrl, amount, orderId, token, _a, firstname, nameRest, invoiceItems, posList, data;
+            var successUrl, failUrl, amount, orderId, _a, firstname, nameRest, invoiceItems, token, posList, data;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -103,9 +102,6 @@ var SipayProvider = {
                         failUrl = constants_1.PAYMENT_FAIL_URL;
                         amount = input.amount.toFixed(2);
                         orderId = (0, nanoid_1.nanoid)(8).toLowerCase();
-                        return [4 /*yield*/, getToken()];
-                    case 1:
-                        token = _b.sent();
                         _a = input.name.split(' '), firstname = _a[0], nameRest = _a.slice(1);
                         invoiceItems = [{
                                 'name': 'Bağış',
@@ -113,6 +109,9 @@ var SipayProvider = {
                                 'qnantity': 1,
                                 'description': ''
                             }];
+                        return [4 /*yield*/, getToken()];
+                    case 1:
+                        token = _b.sent();
                         return [4 /*yield*/, getPosList({
                                 amount: amount,
                                 cardNumber: input.ccNumber,
@@ -121,7 +120,6 @@ var SipayProvider = {
                             })];
                     case 2:
                         posList = _b.sent();
-                        console.log(posList);
                         data = {
                             'endpoint': "".concat(SIPAY.host, "/ccpayment/api/pay3d"),
                             'authorization': token,
@@ -179,4 +177,3 @@ var SIPAY = {
     appId: process.env.SIPAY_APP_ID,
     appSecret: process.env.SIPAY_APP_SECRET,
 };
-console.log(SIPAY);
