@@ -4,63 +4,59 @@ import { PAYMENT_FAIL_URL, PAYMENT_SUCCESS_URL } from '../constants';
 import { TPaymentProvider } from './types';
 
 const TFProvider: TPaymentProvider = {
+  requireCC: false,
   getPaymentFormItems(input) {
     const TEST = process.env['TF_TEST_MODE'] === '1';
     let TF = TEST ? TF_TEST : TF_PROD;
-    
-    const clientId = TF.clientId;
+
+    const clientId = TF.clientId!;
     const successUrl = PAYMENT_SUCCESS_URL;
     const failUrl = PAYMENT_FAIL_URL;
     const storeKey = TF.storeKey;
-    const txnType = 'Auth';
-    const rnd = new Date().getTime();
-    const currencyCode = '949'
+    const refreshTime = process.env['TF_REFRESH_TIME'] || '5';
 
-    const instalments = '';
+    const parameters = {
+      amount: String(input.amount),
+      BillToCompany: '',
+      BillToName: input.name,
+      callbackUrl: successUrl,
+      clientId: clientId,
+      currency: '949',
+      failUrl: failUrl,
+      hashAlgorithm: 'ver3',
+      Instalment: '',
+      lang: 'tr',
+      okUrl: successUrl,
+      refreshTime: refreshTime,
+      rnd: new Date().getTime().toString(),
+      storetype: '3D_PAY_HOSTING',
+      TranType: 'Auth'
+    };
 
-    const amount = String(input.amount);
-    const orderId = nanoid(8).toLowerCase();
+    if (input.recurring) {
+      parameters['RecurringPaymentNumber'] = input.recurringTimes!.toString();
+      parameters['RecurringFrequencyUnit'] = 'M';
+      parameters['RecurringFrequency'] = '1';
+    }
 
-    const hashStr = clientId + orderId + amount + successUrl + failUrl + txnType + instalments + rnd + storeKey;
+    const sortedKeys = Object.keys(parameters).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })) as (keyof typeof parameters)[];
+    const sortedValues = sortedKeys.map(key => parameters[key] || '').map(escapeSpecialChars); // Include empty values
+    const hashStr = `${sortedValues.join('|')}|${storeKey}`;
+    console.log('hashStr', parameters, hashStr);
 
-    const secData = crypto.createHash('sha1')
+    const secData = crypto.createHash('sha512')
       .update(hashStr)
       .digest('hex');
 
     const hashData = Buffer.from(secData, 'hex').toString('base64');
 
-    const isRecurring = input.recurring;
-
     const data = {
-      'hashStr': hashStr,
-      'hashData': hashData,
-      'endpoint': TF.endpoint,
-      'clientid': clientId,
-      'amount': amount,
-      'oid': orderId,
-      'okUrl': successUrl,
-      'failUrl': failUrl,
-      'islemtipi': txnType,
-      'taksit': instalments,
-      'rnd': rnd,
+      //'hashStr': hashStr,
       'hash': hashData,
-      'storetype': '3d_pay_hosting',
-      'refreshtime': process.env['TF_REFRESH_TIME'],
-      'lang': 'tr',
-      'currency': currencyCode,
-      'Fismi': input.name,
-      'tismi': input.name,
-      'tel': input.phone,
-      'Fadres': input.notes || '',
-      'tadres': input.notes || '',
-      'Fil': '',
-    };
+      'endpoint': TF.endpoint,
 
-    if (isRecurring) {
-      data['RecurringPaymentNumber'] = input.recurringTimes;
-      data['RecurringFrequencyUnit'] = 'M';
-      data['RecurringFrequency'] = 1;
-    }
+      ...parameters
+    };
 
     return data;
   },
@@ -68,6 +64,10 @@ const TFProvider: TPaymentProvider = {
   validatePayment() {
     return true;
   }
+}
+
+function escapeSpecialChars(value: string) {
+  return value.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
 }
 
 export default TFProvider;
