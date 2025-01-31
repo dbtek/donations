@@ -15,9 +15,9 @@ const expireYearOpts = Array(15).fill(1).map((_, i) => new Date().getFullYear() 
 
 // markup
 const DonatePage = () => {
-  const [amount, setAmount] = React.useState(50)
-  const [customAmount, setCustomAmount] = React.useState(false)
   const amountOpts = AMOUNT_OPTS;
+  const [amount, setAmount] = React.useState(amountOpts[0])
+  const [customAmount, setCustomAmount] = React.useState(false)
   const [name, setName] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [notes, setNotes] = React.useState('')
