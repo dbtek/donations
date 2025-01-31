@@ -7,3 +7,4 @@ export const CC_FORM_ENABLED = ['1', 'true'].includes(process.env['GATSBY_CC_FOR
 export const LOGO_URL = process.env['GATSBY_LOGO_URL'];
 export const COPYRIGHT = process.env['GATSBY_COPYRIGHT'];
 export const HERO_IMG_URL = process.env['GATSBY_HERO_IMG_URL'];
+export const AMOUNT_OPTS = (process.env['GATSBY_AMOUNT_OPTS'] || '250,500,1000').split(',').map(parseFloat)

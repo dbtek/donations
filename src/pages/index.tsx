@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '../components/Button';
 import { CreditCardForm } from '../components/CreditCardForm';
 import Layout from '../components/Layout';
-import { CC_FORM_ENABLED, RECURRING_PAYMENT_ENABLED, HERO_IMG_URL } from '../constants';
+import { CC_FORM_ENABLED, RECURRING_PAYMENT_ENABLED, HERO_IMG_URL, AMOUNT_OPTS } from '../constants';
 
 const styles = {
   amtBtn: {
@@ -17,7 +17,7 @@ const expireYearOpts = Array(15).fill(1).map((_, i) => new Date().getFullYear() 
 const DonatePage = () => {
   const [amount, setAmount] = React.useState(50)
   const [customAmount, setCustomAmount] = React.useState(false)
-  const amountOpts = [50, 100, 250];
+  const amountOpts = AMOUNT_OPTS;
   const [name, setName] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [notes, setNotes] = React.useState('')

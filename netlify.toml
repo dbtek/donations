@@ -5,6 +5,7 @@
   GATSBY_CC_FORM_ENABLED = "Set 1 for in page credit card form 0 for hosted payment"
   GATSBY_RECURRING_PAYMENT_ENABLED = "Set 1 to enable 0 to disable"
   GATSBY_DEFAULT_PAYMENT_PROVIDER = "Either SIPAY or TF"
+  GATSBY_AMOUNT_OPTS=250,500,1000
 
   TF_TEST_MODE = "0"
   TF_CLIENT_ID = ""
