@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var crypto = require("crypto");
 var constants_1 = require("../constants");
 var TFProvider = {
+    requireCC: false,
     getPaymentFormItems: function (input) {
         var TEST = process.env['TF_TEST_MODE'] === '1';
         var TF = TEST ? TF_TEST : TF_PROD;
