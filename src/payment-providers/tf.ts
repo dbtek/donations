@@ -4,7 +4,6 @@ import { PAYMENT_FAIL_URL, PAYMENT_SUCCESS_URL } from '../constants';
 import { TPaymentProvider } from './types';
 
 const TFProvider: TPaymentProvider = {
-  requireCC: false,
   getPaymentFormItems(input) {
     const TEST = process.env['TF_TEST_MODE'] === '1';
     let TF = TEST ? TF_TEST : TF_PROD;
