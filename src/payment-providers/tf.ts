@@ -17,7 +17,7 @@ const TFProvider: TPaymentProvider = {
     const parameters = {
       amount: String(input.amount),
       BillToCompany: '',
-      BillToName: input.name,
+      // BillToName: input.name,
       callbackUrl: successUrl,
       clientId: clientId,
       currency: '949',
